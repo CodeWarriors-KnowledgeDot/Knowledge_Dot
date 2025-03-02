@@ -24,9 +24,15 @@ $profile->show_users_profile($_SESSION['username']);  //calling the show_users p
 
 
 <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="quiz.css">
 </head>
 
 <style type="text/css">
+  body{
+    background-color: #374954;
+  }
   .li1{
      float: right !important;
   }
@@ -48,7 +54,7 @@ $profile->show_users_profile($_SESSION['username']);  //calling the show_users p
         <!-- navigation bar starts -->
 
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top position-relative">  <!--  postion relative to align the tab content  -->
-  <a class="navbar-brand text-white" href="../index.php">Unique Developer</a>
+  <a class="navbar-brand text-white" href="../index.php">KnowledgeDot</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -95,7 +101,7 @@ $profile->show_users_profile($_SESSION['username']);  //calling the show_users p
   <!-- tab section start -->
 
   <div class="container mt-4 col-md-10 position-relative">
-    <h3 style="font-family: 'Catamaran', sans-serif;">Welcome <?php echo $_SESSION['username']; ?>,Lets start quiz</h3>
+    <h3 style="font-family: 'Catamaran', sans-serif; color: white;">Welcome <?php echo $_SESSION['username']; ?>,</h3>
 <!--   
     <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -117,16 +123,17 @@ $profile->show_users_profile($_SESSION['username']);  //calling the show_users p
    <div class="tab-content">
      <div class="tab-pane active " id="menu1" >
     
-     <center><button type="button" class="btn btn-success mt-5" href="#myid" data-toggle="collapse">Start Quiz</button></center>
+     <center><button type="button" class="btn btn-success mt-5 mb-5" style="width: 170px; height: 50px; font-size: 18px; font-weight: bold" href="#myid" data-toggle="collapse">Let's Start</button></center>
 
      <!-- dropdown list starts -->
 
      <center><div class="col-sm-6 mt-3">
-       <div class="collapse" id="myid">
+       <div class="collapse form-box1" id="myid" style="width:520px; height:120px; margin: 10px; padding: 20px; border-radius: 18px;">
       <div class="form-group">
-    <label>select Course</label>
+    <label style="color: White; font-size: 30px; font-family:Montserrat; ">Select the Course</label>
     <form method="POST" action="question_show.php">
-    <select class="form-control" id="exampleFormControlSelect1" name="selected_course">
+      
+    <select class="form-control form-box1" id="exampleFormControlSelect1" name="selected_course" style="width: 115px; height: 45px; font-family: Montserrat; border-radius: 8px;">
 
       <?php 
        $profile->show_courses();                                 //calling show_courses() method of users class
@@ -135,7 +142,7 @@ $profile->show_users_profile($_SESSION['username']);  //calling the show_users p
          
  ?>
 
-      <option value="<?php echo $course['id'] ;?>"><?php echo $course['cat_name']; ?></option>    <!-- displaying course name in dropdown -->
+      <option class="form-box1 " style="font-weight: bold; background-color: #9b9492; font-size: 15px; font-family: Montserrat; border radius:10px" value="<?php echo $course['id'] ;?>"><?php echo $course['cat_name']; ?></option>    <!-- displaying course name in dropdown -->
     
 
       <?php
@@ -143,7 +150,7 @@ $profile->show_users_profile($_SESSION['username']);  //calling the show_users p
 
       ?>
     </select>
-      <button type="submit" class="btn btn-success m-5">Start Quiz</button>
+      <button type="submit" class="btn btn-success m-5" style="width: 120px; height: 50px; font-size: 18px; font-weight: bold; border-radis: 10px" >Start Quiz</button>
   </form>
   </div>
 </div>

@@ -1,0 +1,14 @@
+.form-box1{
+	width:410px;
+	height:350px;
+	border-radius: 28.46px;
+	overflow: hidden;
+	background-color: rgba(255,255,255,0.1);
+	border: 2.13px solid rgba(255,255,255,0.5);
+	backdrop-filter: blur(4px);
+	position: relative;
+	/* margin-top:265px;
+	margin-left: 515px; */
+	color: #fff;
+
+}
