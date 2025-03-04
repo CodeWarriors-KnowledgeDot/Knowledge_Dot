@@ -4,40 +4,17 @@
 <head>
   <title></title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 
+  <link rel="stylesheet" type="text/css" href="../..//css/admin.css">
 
-<!-- google font -->
- <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
- <style type="text/css">
-  
-
-    .sidebar-list
-    {
-        margin-right: -15px;
-        
-        font-family: 'Quicksand', sans-serif; 
-        font-size: 14px
-    }
-
-    .sidebar-list li:hover
-    {
-      background-color: deepskyblue !important;
-    }
-     .sidebar-list li a
-     {
-        color:white;
-        text-decoration: none;
-     }
- </style>
 </head>
 
 <body>
@@ -48,81 +25,89 @@
 
  ?>
 
- <div class="container-fluid" style="margin-top: 50px;" >
-      <div class="row">
-<!-- ========================================================================================================================== -->
+<?php
 
-<!-- sidebar starts -->
+   require("../includes/sidebar.php");    //navigation bar included
 
+ ?>
+  <div class="main-content">
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg mb-4">
+                    <div class="card-header text-Primary py-3">
+                        <h3 class="mb-0 text-center" ></i>Update Topic</h3>
+                    </div>
+                    <div class="card-body">
+                        <?php 
+                        $con = mysqli_connect('localhost','root','','uniquedeveloper');
+                        $course_id = $_GET['course_id'];
+                        $q = "SELECT * FROM courses WHERE id='$course_id'";
+                        $result = mysqli_query($con, $q);
+                        
+                        while ($res = mysqli_fetch_array($result)) { ?>
+                        <form method="POST" action="verify/verify_changes.php">
+                            <input type="hidden" name="cors_id" value="<?php echo htmlspecialchars($res['id']); ?>">
+                            
+                            <div class="form-group">
+                                <label class="font-weight-bold">Course Name:</label>
+                                <input type="text" name="coursename" 
+                                       class="form-control bg-light" 
+                                       readonly 
+                                       value="<?php echo htmlspecialchars($res['course_name']); ?>">
+                            </div>
 
+                            <div class="form-group">
+                                <label class="font-weight-bold">Topic Name:</label>
+                                <input type="text" name="topic_name" 
+                                       class="form-control"
+                                       value="<?php echo htmlspecialchars($res['topic_name']); ?>">
+                            </div>
 
+                            <div class="form-group">
+                                <label class="font-weight-bold">Content:</label>
+                                <textarea id="editor" name="editor" 
+                                          class="form-control ckeditor" 
+                                          placeholder="Enter the content...">
+                                    <?php echo htmlspecialchars($res['description']); ?>
+                                </textarea>
+                            </div>
 
-        <div class="col-sm-2 col-md-2 sidebar badge-dark" style="margin:inherit;" id="sidebar" >
-         <ul class="list-group text-white sidebar-list">
-            <li class="list-group-item  bg-dark "><a href="">Welcome Admin</a></li>
-            <li class="list-group-item bg-dark "><a href="manage_courses/manage_courses.php">Manage Courses</a></li>
-            <li class="list-group-item bg-dark"><a href="">Manage Quize</a></li>
-            <li class="list-group-item bg-dark"><a href="">Manage Videos</a></li>
-            <li class="list-group-item bg-dark"><a href="">Manage Comments</a></li>
-            <li class="list-group-item bg-dark"><a href="">Manage Users</a></li>
-            <li class="list-group-item bg-dark"><a href="">Logout</a></li>
-            <li class="list-group-item bg-dark" style="height: 400px;"></li>
-          </ul>
+                            <div class="text-center mt-5">
+                                <button type="submit" name="submitupdate" 
+                                        class="btn btn-primary btn-lg px-5">
+                                    <i class="fas fa-save mr-2"></i>Save Changes
+                                </button>
+                            </div>
+                        </form>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <!-- sidebar ends -->
-
-  <!-- ========================================================================================================================== -->
-
-
-
-      <div class="col-md-10 ">   <!--  main body content starts -->
-
- <!-- ===============================================================================================================-->
-
-
-                              <!-- form starts -->
-
-           
-<?php 
-
-
-           $con=mysqli_connect('localhost','root');
-
-
-      mysqli_select_db($con,'uniquedeveloper');
-          $course_id=$_GET['course_id'];
-          $q="select * from courses where id='$course_id'";
-      $result=mysqli_query($con,$q);
-      while ($res=mysqli_fetch_array($result)) {
-
-          ?>
-<div class="mt-1"><h3 class="text-center">update topic</h3></div>
-
-<form  method="POST" action="verify/verify_changes.php" class="ml-3">
-  <input type="hidden" name="cors_id" value="<?php echo $res['id']; ?>">
-  
-  Enter course name:<input type="text" name="coursename" readonly="readonly" class="form-control" value="<?php echo $res['course_name'] ?>"><br>
-  Enter topic name :<input type="text" name="topic_name" class="form-control" value="<?php echo $res['topic_name'] ?>">
-
-  Enter the content:
-<textarea id="editor" name="editor" class="ckeditor" placeholder="Enter the content..."><?php echo $res['description']; ?></textarea>
-
-<button type="submit" name="submitupdate" class="btn btn-success">submit</button>
-</form>
-<?php } ?>
-
-
-  </div>
-  </div>
-
-
-
-
-
-
-
-
- <script src="../ckeditor/ckeditor.js"></script>   <!-- script for ckeditor -->
-<body>  
+    <!-- Scripts -->
+    <script src="../ckeditor/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Initialize CKEditor
+        ClassicEditor
+            .create(document.querySelector('.ckeditor'), {
+                toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                        'blockQuote', 'insertTable', 'undo', 'redo'
+                    ]
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
 </html>
